@@ -30,7 +30,6 @@ def dropPiece(piece, column):
   row = openRowFinder(column)
   global ps
   ps[row][column] = piece
-  print(ps[row][column])
   board = f'''
   1   2   3   4   5   6   7
 +---+---+---+---+---+---+---+
