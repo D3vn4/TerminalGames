@@ -1,3 +1,4 @@
+
 ps = [[' ', ' ', ' ', ' ', ' ', ' ', ' '],
 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -24,7 +25,7 @@ def openRowFinder(column):
       break
     else:
       pass
-    
+
     
 def dropPiece(piece, column):
   row = openRowFinder(column)
@@ -59,3 +60,31 @@ def dropPiece(piece, column):
 +---+---+---+---+---+---+---+
 '''
   print(board)
+  
+  
+def winCondition():
+  for i in range(0,6):
+    for j in range(0,7):
+      if (j<4) and (ps[i][j] == ps[i][j+1] == ps[i][j+2] == ps[i][j+3] == 'X' or ps[i][j] == ps[i][j+1] == ps[i][j+2] == ps[i][j+3] == 'O'):
+        return True
+        break
+      elif (i<3) and (ps[i][j] == ps[i+1][j] == ps [i+2][j] == ps[i+3][j] == 'X' or ps[i][j] == ps[i+1][j] == ps [i+2][j] == ps[i+3][j] == 'O'):
+        return True
+        break
+      elif (i<3 and j<4) and (ps[i][j] == ps[i+1][j+1] == ps[i+2][j+2] == ps[i+3][j+3] == 'X' or ps[i][j] == ps[i+1][j+1] == ps[i+2][j+2] == ps[i+3][j+3] == 'O'):
+        return True
+        break
+      elif (j-3>=0 and i<3) and (ps[i][j] == ps[i+1][j-1] == ps[i+2][j-2] == ps[i+3][j-3] == 'X' or ps[i][j] == ps[i+1][j-1] == ps[i+2][j-2] == ps[i+3][j-3] == 'O'):
+        return True
+        break
+        
+        
+def playGame():
+  while True:
+    if winCondition() == True:
+      print("WON")
+      break
+    pieceMove = input("Select your Piece [O or X]: ")
+    move = int(input("Select Column to drop your piece: "))
+    dropPiece(pieceMove, move-1)
+playGame()
