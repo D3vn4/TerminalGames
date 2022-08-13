@@ -100,7 +100,8 @@ def startGame():
     selectSlot(playBoard, move, turn)
     
     if checkWin(playBoard, turn): # checks if the player won after the last move
-      print(f"{turn} has WON!")
+      print(f"""<====================>
+      {turn} has WON!""")
       printBoard(playBoard)
       winner = True
       break
@@ -111,7 +112,8 @@ def startGame():
       turn = "X"
 
   if not winner:  #prints tie message
-    print("It was a TIE!")
+    print("""<====================>
+      It was a TIE!""")
     printBoard(playBoard)
     
 # STARTS THE GAME!!!!
