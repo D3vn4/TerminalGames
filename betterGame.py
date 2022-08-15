@@ -101,7 +101,7 @@ def play_game():
     # Creating an empty board
     my_board = []
     for col in range(7):
-        my_board.append(['S'] * 6)
+        my_board.append([' '] * 6)
 
     # Starting the game with X going first    
     turn = "X"
