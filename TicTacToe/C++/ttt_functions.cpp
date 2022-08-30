@@ -1,6 +1,8 @@
 #include <iostream>
 
 
+
+
 void greet() {
     std::cout << "\n";
     std::cout << "=============================================================================\n";
@@ -11,4 +13,26 @@ void greet() {
     std::cout << " |__| |__|\\___  >          |__| (____  /\\___  >          |__|  \\____/ \\___  > " << "\n";
     std::cout << "              \\/                     \\/     \\/                            \\/ " << "\n";
     std::cout << "==============================================================================\n";
+}
+
+void makeBoard(char game[9]) {
+    std::cout << "   |   |   " << "\n";
+    std::cout << " " << game[0] << " | " << game[1] << " | " << game[2] << " \n";
+    std::cout << "   |   |   " << "\n";
+    std::cout << "---+---+---" << "\n"; 
+    std::cout << "   |   |   " << "\n";
+    std::cout << " " << game[3] << " | " << game[4] << " | " << game[5] << " \n";
+    std::cout << "   |   |   " << "\n";
+    std::cout << "---+---+---" << "\n"; 
+    std::cout << "   |   |   " << "\n";
+    std::cout << " " << game[6] << " | " << game[7] << " | " << game[8] << " \n";
+    std::cout << "   |   |   " << "\n";
+    std::cout << "================\n";
+}
+
+void demoBoard() {
+    char demo[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    std::cout << "Here's a Demo Board for you.\n Use the numbers on the demo board as a reference for your turn\n";
+    std::cout << "==============================================================================\n";
+    makeBoard(demo);
 }
