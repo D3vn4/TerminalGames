@@ -7,8 +7,8 @@
 
 int main() {
     greet();
-    demoBoard();
-    makeBoard(playGame);
+    startGame();
+
 
 
     return 0;
