@@ -9,7 +9,5 @@ int main() {
     greet();
     startGame();
 
-
-
     return 0;
 }

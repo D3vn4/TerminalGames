@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 
 
@@ -38,79 +39,97 @@ void demoBoard() {
     makeBoard(demo);
 }
 
-bool validMove(int slot, char board[9]) {
-    if (not 1<=slot<=9) {
-        std::cout << "Not a valid slot, please enter a number between 1 and 9";
+bool validMove(char board[9], int slot) {
+    if (slot < 1 or slot >9) {
         return false;
+    } else if (board[slot-1] != ' ') {
+        return false;
+    } else {
+        return true;
     }
-    if (board[slot-1] != ' ') {
-        std::cout << "Slot already occupied, Please select different slot.";
+}
+
+bool setSlot(char board[9], int slot, char piece) {
+    if (not validMove(board, slot)) {
+        std::cout << "Trying to place " << piece << " in slot no." << slot;
+        std::cout << "\nMake sure to pick an empty slot.\n";
+        return false;
+    } else if (validMove(board, slot)) {
+        board[slot-1] = piece;
+        std::cout << "Placed " << piece << " on " << slot << "\n";
+        return true;
+    } else if (piece != 'X' || piece != 'O') {
+        return false;
+    } else {
         return false;
     }
 }
 
-bool setPiece(int slot, char piece, char board[9]) {
-    if (not validMove(slot, board)) {
-        std::cout << "Error: ";
-        return false;
+std::vector<int> availableMoves(char board[9]) {
+    std::vector<int> list;
+    for (int i = 0; i < 9; i++) {
+        if (validMove(board, i)) {
+            list.push_back(i);
+        }
     }
-    if (board[slot-1] == ' ') {
-        board[slot-1] = piece;
-        return true;
-    }
-    return false;
+    return list;
 }
 
 bool checkWin(char board[9], char piece) {
-
-    // Check for Horizontal pieces
     if (board[0] == board[1] == board[2] == piece) {
         return true;
     } else if (board[3] == board[4] == board[5] == piece) {
         return true;
     } else if (board[6] == board[7] == board[8] == piece) {
         return true;
-    }
-
-    // Check for Vertical pieces
-    if (board[0] == board[3] == board[6] == piece) {
+    } else if (board[0] == board[3] == board[6] == piece) {
         return true;
     } else if (board[1] == board[4] == board[7] == piece) {
         return true;
     } else if (board[2] == board[5] == board[8] == piece) {
         return true;
-    }
-
-    // Check for '/' Diagonal
-    if (board[2] == board[4] == board[6] == piece) {
+    } else if (board[2] == board[4] == board[6] == piece) {
         return true;
-    }
-
-    // Check for '\' Diagonal
-    if(board[0] == board[4] == board[8] == piece) {
+    } else if (board[0] == board[4] == board[8] == piece) {
         return true;
+    } else {
+        return false;
     }
-
-    return false;
 }
 
-bool checkDraw(char board[9]) {
-    std::vector<char> avlMoves = {};
-    for (int i = 0; i < 9; i++) {
-        if (board[i] == ' ') {
-            avlMoves.push_back(i);
-        }
-    }
-    if (avlMoves.empty()) {
-        return true;
-    }
-    return false;
-}
-
-bool gameIsOver(char board[9]) {
-    return checkWin(board, 'X') || checkWin(board, 'O') || checkDraw(board);
+bool gameOver(char board[9]) {
+    return checkWin(board, 'X') || checkWin(board, 'O') || availableMoves(board).size() == 0;
 }
 
 void startGame() {
+    
     demoBoard();
+    char playBoard[9] = {' ',' ',' ',' ',' ',' ',' ',' ',' '};
+    char turn = 'X';
+    bool winner = false;
+    while (not gameOver(playBoard)) {
+        makeBoard(playBoard);
+        int slot = 0;
+        std::vector<int> avlMoves = availableMoves(playBoard);
+        while (not std::count(avlMoves.begin(), avlMoves.end(), slot-1)) {
+            std::cout << "It is " << turn << "'s turn. Please select a slot: ";
+            std::cin >> slot;
+        }
+        setSlot(playBoard, slot, turn);
+        if (checkWin(playBoard, turn)) {
+            std::cout << turn << " has WON!\n";
+            makeBoard(playBoard);
+            winner = true;
+            break;
+        }
+        if (turn == 'X') {
+            turn = 'O';
+        } else {
+            turn = 'X';
+        }
+    }
+    if (not winner) {
+        std::cout << "It was a TIE!\n";
+        makeBoard(playBoard);
+    }
 }
