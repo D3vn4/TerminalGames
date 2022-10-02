@@ -76,21 +76,21 @@ std::vector<int> availableMoves(char board[9]) {
 }
 
 bool checkWin(char board[9], char piece) {
-    if (board[0] == board[1] == board[2] == piece) {
+    if (board[0] == piece && board[1] == piece && board[2] == piece) {
         return true;
-    } else if (board[3] == board[4] == board[5] == piece) {
+    } else if (board[3] == piece && board[4] == piece && board[5] == piece) {
         return true;
-    } else if (board[6] == board[7] == board[8] == piece) {
+    } else if (board[6] == piece && board[7] == piece && board[8] == piece) {
         return true;
-    } else if (board[0] == board[3] == board[6] == piece) {
+    } else if (board[0] == piece && board[3] == piece && board[6] == piece) {
         return true;
-    } else if (board[1] == board[4] == board[7] == piece) {
+    } else if (board[1] == piece && board[4] == piece && board[7] == piece) {
         return true;
-    } else if (board[2] == board[5] == board[8] == piece) {
+    } else if (board[2] == piece && board[5] == piece && board[8] == piece) {
         return true;
-    } else if (board[2] == board[4] == board[6] == piece) {
+    } else if (board[2] == piece && board[4] == piece && board[6] == piece) {
         return true;
-    } else if (board[0] == board[4] == board[8] == piece) {
+    } else if (board[0] == piece && board[4] == piece && board[8] == piece) {
         return true;
     } else {
         return false;
