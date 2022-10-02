@@ -67,7 +67,7 @@ bool setSlot(char board[9], int slot, char piece) {
 
 std::vector<int> availableMoves(char board[9]) {
     std::vector<int> list;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 1; i < 10; i++) {
         if (validMove(board, i)) {
             list.push_back(i);
         }
@@ -111,7 +111,7 @@ void startGame() {
         makeBoard(playBoard);
         int slot = 0;
         std::vector<int> avlMoves = availableMoves(playBoard);
-        while (not std::count(avlMoves.begin(), avlMoves.end(), slot-1)) {
+        while (not std::count(avlMoves.begin(), avlMoves.end(), slot)) {
             std::cout << "It is " << turn << "'s turn. Please select a slot: ";
             std::cin >> slot;
         }
